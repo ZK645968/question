@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width:device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+  
+  <title>question</title>
+  <style  type="text/css">
+    body{
+      margin: 0;
+    }
+   .el-message-box{
+      width: 340px !important;
+    }
+    input[type=radio]{
+        width:  15px !important;
+        height: 15px !important;
+    }
+    .singleData .graph div{
+ 				width:0px;
+		}
+       
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+	
+  <script>
+  window.onload =function(){
+	var obtn = document.getElementById('btn');
+	var clientHeight = document.documentElement.clientHeight; //可视区域的高度
+	var timer = null;
+	var isTop = true;
+	
+	//滚动条滚动时触发
+	window.onscroll = function(){
+		var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+		if(osTop >= clientHeight){
+			obtn.style.display = 'block';
+		}
+		else{
+			obtn.style.display = 'none';
+		}
+		if(!isTop){
+			clearInterval(timer);
+		}
+		isTop = false;
+	}
+
+	obtn.onclick = function(){
+
+		timer = setInterval(function(){
+			//滚动条离顶部的高度
+		var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+		var speed = Math.floor(-osTop / 6);
+		document.documentElement.scrollTop = document.body.scrollTop = osTop + speed;
+		
+		isTop = true;
+		// console.log(osTop - speed);
+		if(osTop == 0){
+			clearInterval(timer);
+		}
+		},30);
+	}
+}
+
+
+</script>
+
+<!--<script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>-->
+</body>
+</html>
